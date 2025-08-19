@@ -18,6 +18,7 @@ export class ProductEffects {
           map((products) => ProductActions.loadProductsSuccess({ products })),
           catchError((error) =>
             of(ProductActions.loadProductsFailure({ error }))
+          
           )
         )
       )
