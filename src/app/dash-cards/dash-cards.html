@@ -1,0 +1,58 @@
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-5">
+  <mat-card class="flex items-center p-4" style="flex-direction: unset">
+    <div class="bg-[#96beff] p-3 flex items-center rounded-2xl mr-5">
+      <mat-icon
+        style="color: #3b82f6; font-size: 30px; width: unset; height: unset"
+        class=""
+      >
+        inventory_2
+      </mat-icon>
+    </div>
+    <div>
+      <div class="text-gray-500">Total Items</div>
+      <div class="text-2xl font-bold">{{ totalItems }}</div>
+    </div>
+  </mat-card>
+
+  <mat-card class="flex items-center p-4" style="flex-direction: unset">
+    <div class="bg-[#ffdca0] p-3 flex items-center rounded-2xl mr-5">
+      <mat-icon
+        style="color: #f59e0b; font-size: 40px; width: unset; height: 38px"
+        class=""
+        >warning</mat-icon
+      >
+    </div>
+    <div>
+      <div class="text-gray-500">Low Stock Items</div>
+      <div class="text-2xl font-bold">{{ lowStockItems }}</div>
+    </div>
+  </mat-card>
+
+  <mat-card class="flex items-center p-4" style="flex-direction: unset">
+    <div class="bg-[#ff8f8f] p-3 flex items-center rounded-2xl mr-5">
+      <mat-icon
+        style="color: #ef4444; font-size: 40px; width: unset; height: 38px"
+        class=""
+        >event_busy</mat-icon
+      >
+    </div>
+    <div>
+      <div class="text-gray-500">Expired Items</div>
+      <div class="text-2xl font-bold">{{ expiredItems }}</div>
+    </div>
+  </mat-card>
+
+  <mat-card class="flex items-center p-4" style="flex-direction: unset">
+    <div class="bg-[#dadada] p-3 flex items-center rounded-2xl mr-5">
+      <mat-icon
+        style="color: #6b7280; font-size: 40px; width: unset; height: 38px"
+        class=""
+        >remove_shopping_cart</mat-icon
+      >
+    </div>
+    <div>
+      <div class="text-gray-500">Out of Stock</div>
+      <div class="text-2xl font-bold">{{ outOfStockItems }}</div>
+    </div>
+  </mat-card>
+</div>
