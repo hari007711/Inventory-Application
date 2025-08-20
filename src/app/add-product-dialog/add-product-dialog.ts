@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   ReactiveFormsModule,
@@ -6,9 +6,11 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import * as ProductActions from '../store/products/product.actions';
+import { InventoryItem } from '../services/product.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'add-product-dialog',
@@ -18,13 +20,17 @@ import * as ProductActions from '../store/products/product.actions';
 })
 export class AddProductDialog {
   productForm!: FormGroup;
+  isEditMode = false;
 
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<AddProductDialog>,
-    private store: Store
+    private store: Store,
+    private snackBar: MatSnackBar,
+    @Inject(MAT_DIALOG_DATA) public data: { product?: InventoryItem }
   ) {
     this.productForm = this.fb.group({
+      id: [null],
       name: ['', Validators.required],
       sku: [''],
       category: [''],
@@ -38,6 +44,11 @@ export class AddProductDialog {
       lastUpd: [''],
       imgURL: [''],
     });
+
+    if (data && data.product) {
+      this.isEditMode = true;
+      this.productForm.patchValue(data.product);
+    }
   }
 
   onSubmit() {
@@ -45,8 +56,27 @@ export class AddProductDialog {
       this.productForm.markAllAsTouched();
       return;
     }
-    const newProduct = this.productForm.value;
-    this.store.dispatch(ProductActions.addProduct({ product: newProduct }));
-    this.dialogRef.close(true); 
+
+    const product = this.productForm.value;
+
+    if (this.isEditMode) {
+      this.store.dispatch(ProductActions.updateProduct({ product }));
+      this.snackBar.open('Product updated successfully', undefined, {
+        duration: 3000,
+        verticalPosition: 'top',
+      });
+    } else {
+      delete product.id;
+      this.store.dispatch(ProductActions.addProduct({ product }));
+      this.snackBar.open('Product added successfully', undefined, {
+        duration: 3000,
+        verticalPosition: 'top',
+      });
+    }
+    this.dialogRef.close(true);
+  }
+
+  onClose() {
+    this.dialogRef.close();
   }
 }

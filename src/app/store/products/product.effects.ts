@@ -38,4 +38,32 @@ export class ProductEffects {
       )
     )
   );
+
+  deleteProduct$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProductActions.deleteProduct),
+      mergeMap(({ id }) =>
+        this.dataService.deleteProduct(id).pipe(
+          map(() => ProductActions.deleteProductSuccess({ id })),
+          catchError((error) => of(ProductActions.deleteProductFailure({ error })))
+        )
+      )
+    )
+  );
+  updateProduct$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(ProductActions.updateProduct),
+    mergeMap(({ product }) =>
+      this.dataService.updateProduct(product).pipe(
+        map((updatedProduct) =>
+          ProductActions.updateProductSuccess({ product: updatedProduct })
+        ),
+        catchError((error) =>
+          of(ProductActions.updateProductFailure({ error }))
+        )
+      )
+    )
+  )
+);
+
 }

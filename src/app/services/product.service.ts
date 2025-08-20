@@ -4,19 +4,19 @@ import { Observable } from 'rxjs';
 import { Product } from '../store/products/product.model';
 
 export interface InventoryItem {
-  id: number;
+  id: string;
   name: string;
   sku: string;
   description: string;
   category: string;
   price: number;
-  stock: number;
+  stockQty: number;
   minStock: number;
-  status: 'active' | 'low_stock' | 'out_of_stock' | 'expired';
+  status: 'Available' | 'Low Stock' | 'Expired' | 'Not Available';
   supplier: string;
-  imageUrl: string;
-  lastUpdated?: string;
-  storageLocation?: string;
+  imgURL: string;
+  lastUpd?: string;
+  storageLoc?: string;
 }
 
 @Injectable({
@@ -36,8 +36,15 @@ export class ProductService {
   }
 
   addProduct(product: any) {
-  return this.http.post<any>('http://localhost:3000/products', product);
-}
-
-
+    return this.http.post<any>('http://localhost:3000/products', product);
+  }
+  deleteProduct(id: string) {
+    return this.http.delete(`http://localhost:3000/products/${id}`);
+  }
+  updateProduct(product: InventoryItem): Observable<InventoryItem> {
+    return this.http.put<InventoryItem>(
+      `http://localhost:3000/products/${product.id}`,
+      product
+    );
+  }
 }

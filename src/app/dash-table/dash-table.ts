@@ -23,7 +23,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { loadProducts } from '../store/products/product.actions';
 import { selectAllProducts } from '../store/products/product.selectors';
-
+import * as ProductActions from '../store/products/product.actions';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-dash-table',
   standalone: true,
@@ -42,14 +43,32 @@ import { selectAllProducts } from '../store/products/product.selectors';
   styleUrls: ['./dash-table.css'],
 })
 export class DashTable implements AfterViewInit {
-  displayedColumns: string[] = ['name', 'category', 'price', 'actions'];
+  displayedColumns: string[] = [
+    'id',
+    'imgURL',
+    'name',
+    'price',
+    'minStock',
+    'stockQty',
+    'category',
+    'status',
+    'sku',
+    'storageLoc',
+    'supplier',
+    'lastUpd',
+    'actions',
+  ];
   showAddProductModal = false;
   dataSource = new MatTableDataSource<InventoryItem>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private dialog: MatDialog, private store: Store) {}
+  constructor(
+    private dialog: MatDialog,
+    private store: Store,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -60,16 +79,15 @@ export class DashTable implements AfterViewInit {
     });
   }
 
+  setData(products: any[]) {
+    this.dataSource.data = products;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-  editItem(item: Product) {
-    console.log('Edit:', item);
-  }
-
-  deleteItem(item: Product) {
-    console.log('Delete:', item);
   }
 
   @Output() addProductClick = new EventEmitter<void>();
@@ -84,6 +102,28 @@ export class DashTable implements AfterViewInit {
     const dialogRef = this.dialog.open(AddProductDialog, {
       width: '60%',
       height: '700px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.store.dispatch(loadProducts());
+      }
+    });
+  }
+  deleteItem(element: any) {
+    if (confirm(`Are you sure you want to delete ${element.name}?`)) {
+      this.store.dispatch(ProductActions.deleteProduct({ id: element.id }));
+      this.snackBar.open('Product deleted successfully', undefined, {
+        duration: 3000,
+        verticalPosition: 'top',
+      });
+    }
+  }
+  editItem(item: InventoryItem) {
+    const dialogRef = this.dialog.open(AddProductDialog, {
+      width: '60%',
+      height: '700px',
+      data: { product: item },
     });
 
     dialogRef.afterClosed().subscribe((result) => {

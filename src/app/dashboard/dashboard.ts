@@ -6,12 +6,7 @@ import { DashTable } from '../dash-table/dash-table';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [
-    MatCardModule,
-    MatIconModule,
-    DashCards,
-    DashTable,
-  ],
+  imports: [MatCardModule, MatIconModule, DashCards, DashTable],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
