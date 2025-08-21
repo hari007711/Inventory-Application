@@ -1,4 +1,42 @@
-<div class="p-6">
-  <h2 class="text-2xl font-bold">About</h2>
-  <p>This is the about page for the Inventory Management System.</p>
+<div class="about-container">
+  <section class="intro">
+    <h1 class="title">About Inventory App</h1>
+    <p class="subtitle">
+      Inventory App helps businesses track and manage their stock efficiently.
+      From monitoring expired products to keeping an eye on low stock, our
+      mission is to simplify inventory management with an easy-to-use interface.
+    </p>
+  </section>
+  <section>
+    <h2 class="section-title">Key Features</h2>
+    <div class="card-grid">
+      <mat-card *ngFor="let f of features" class="feature-card">
+        <h3 class="font-semibold">{{ f.title }}</h3>
+        <p>{{ f.desc }}</p>
+      </mat-card>
+    </div>
+  </section>
+  <section>
+    <h2 class="section-title">How It Works</h2>
+    <ol class="custom-list">
+      <li>Add products with details</li>
+      <li>View inventory in dashboard</li>
+      <li>Track expired or low-stock items</li>
+      <li>Analyze reports & plan ahead</li>
+    </ol>
+  </section>
+  <section>
+    <h2 class="section-title">Tech Stack</h2>
+    <div class="chip-container">
+      <mat-card *ngFor="let tech of techStack" class="chip">
+        {{ tech }}
+      </mat-card>
+    </div>
+  </section>
+  <section>
+    <h2 class="section-title">Future Roadmap</h2>
+    <ul class="custom-list">
+      <li *ngFor="let item of roadmap">{{ item }}</li>
+    </ul>
+  </section>
 </div>

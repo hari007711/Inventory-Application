@@ -10,7 +10,7 @@
     <form
       [formGroup]="productForm"
       (ngSubmit)="onSubmit()"
-      class="flex flex-col flex-1"
+      class="flex flex-col flex-1 h-100"
     >
       <div class="flex-1 overflow-y-auto p-5 space-y-4">
         <div class="flex flex-col">
@@ -27,7 +27,7 @@
             "
             class="text-red-500"
           >
-            Product Name is required
+           Please Enter Product Name
           </small>
         </div>
 
@@ -37,16 +37,34 @@
             <input
               type="text"
               formControlName="sku"
-              class="border w-60 border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="border w-65 border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+            <small
+            *ngIf="
+              productForm.get('name')?.invalid &&
+              productForm.get('name')?.touched
+            "
+            class="text-red-500"
+          >
+           Please Enter SKU
+          </small>
           </div>
           <div class="flex flex-col">
             <label class="text-sm font-medium mb-1">Category</label>
             <input
               type="text"
               formControlName="category"
-              class="border w-60 border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="border w-65 border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+            <small
+            *ngIf="
+              productForm.get('name')?.invalid &&
+              productForm.get('name')?.touched
+            "
+            class="text-red-500"
+          >
+           Please Enter Category
+          </small>
           </div>
         </div>
 
@@ -56,6 +74,15 @@
             formControlName="description"
             class="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           ></textarea>
+          <small
+            *ngIf="
+              productForm.get('name')?.invalid &&
+              productForm.get('name')?.touched
+            "
+            class="text-red-500"
+          >
+           Please Enter Description
+          </small>
         </div>
 
         <div class="flex justify-between">
@@ -64,24 +91,51 @@
             <input
               type="number"
               formControlName="price"
-              class="border w-40 border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="border w-42 border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+            <small
+            *ngIf="
+              productForm.get('name')?.invalid &&
+              productForm.get('name')?.touched
+            "
+            class="text-red-500"
+          >
+           Please Enter Price
+          </small>
           </div>
           <div class="flex flex-col">
             <label class="text-sm font-medium mb-1">Stock Qty</label>
             <input
               type="number"
               formControlName="stockQty"
-              class="border w-40 border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="border w-42 border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+            <small
+            *ngIf="
+              productForm.get('name')?.invalid &&
+              productForm.get('name')?.touched
+            "
+            class="text-red-500"
+          >
+           Please Enter Stock Qty
+          </small>
           </div>
           <div class="flex flex-col">
             <label class="text-sm font-medium mb-1">Min Stock</label>
             <input
               type="number"
               formControlName="minStock"
-              class="border w-40 border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="border w-42 border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+            <small
+            *ngIf="
+              productForm.get('name')?.invalid &&
+              productForm.get('name')?.touched
+            "
+            class="text-red-500"
+          >
+           Please Enter Min Stock
+          </small>
           </div>
         </div>
 
@@ -90,22 +144,40 @@
             <label class="text-sm font-medium mb-1">Status</label>
             <select
               formControlName="status"
-              class="border w-60 border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="border w-65 border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">Select Status</option>
-              <option value="Expired">Available</option>
+              <option value="Available">Available</option>
               <option value="Expired">Expired</option>
               <option value="Low Stock">Low Stock</option>
               <option value="Not Available">Not Available</option>
             </select>
+            <small
+            *ngIf="
+              productForm.get('name')?.invalid &&
+              productForm.get('name')?.touched
+            "
+            class="text-red-500"
+          >
+           Please Select Status
+          </small>
           </div>
           <div class="flex flex-col">
             <label class="text-sm font-medium mb-1">Supplier</label>
             <input
               type="text"
               formControlName="supplier"
-              class="border w-60 border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="border w-65 border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+            <small
+            *ngIf="
+              productForm.get('name')?.invalid &&
+              productForm.get('name')?.touched
+            "
+            class="text-red-500"
+          >
+           Please Enter Supplier
+          </small>
           </div>
         </div>
 
@@ -115,16 +187,34 @@
             <input
               type="text"
               formControlName="storageLoc"
-              class="border w-60 border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="border w-65 border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+            <small
+            *ngIf="
+              productForm.get('name')?.invalid &&
+              productForm.get('name')?.touched
+            "
+            class="text-red-500"
+          >
+           Please Enter Storage Location
+          </small>
           </div>
           <div class="flex flex-col">
             <label class="text-sm font-medium mb-1">Last Updated</label>
             <input
               type="date"
               formControlName="lastUpd"
-              class="border w-60 border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="border w-65 border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+            <small
+            *ngIf="
+              productForm.get('name')?.invalid &&
+              productForm.get('name')?.touched
+            "
+            class="text-red-500"
+          >
+           Please Enter Last Updated
+          </small>
           </div>
         </div>
 
@@ -135,11 +225,20 @@
             formControlName="imgURL"
             class="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
+          <small
+            *ngIf="
+              productForm.get('name')?.invalid &&
+              productForm.get('name')?.touched
+            "
+            class="text-red-500"
+          >
+           Please Enter Image URL
+          </small>
         </div>
       </div>
 
       <div
-        class="p-5 border-t border-gray-400 flex justify-end space-x-2 bg-gray-50"
+        class="p-5 rounded-lg border-t border-gray-400 flex justify-end space-x-2 bg-gray-50"
       >
         <button
           type="button"

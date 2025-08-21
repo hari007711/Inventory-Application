@@ -56,7 +56,6 @@ export class AddProductDialog {
       this.productForm.markAllAsTouched();
       return;
     }
-
     const product = this.productForm.value;
 
     if (this.isEditMode) {

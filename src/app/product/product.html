@@ -1,4 +1,111 @@
-<div class="p-6">
-  <h2 class="text-2xl font-bold">Products</h2>
-  <p>List of products will be displayed here.</p>
+<div class="mt-10">
+  <mat-card>
+    <mat-card-header class="justify-between items-center mb-5">
+      <mat-card-title>Products</mat-card-title>
+
+      <div class="flex">
+        <div class="search-container mr-5">
+          <mat-icon>search</mat-icon>
+          <input
+            (input)="applyFilter($event)"
+            placeholder="Search items"
+            class="search-input"
+          />
+        </div>
+      </div>
+    </mat-card-header>
+
+    <mat-card-content>
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        matSort
+        class="mat-elevation-z8 w-full"
+      >
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
+        <ng-container matColumnDef="imgURL">
+          <th mat-header-cell *matHeaderCellDef>Image</th>
+          <td mat-cell *matCellDef="let product">
+            <img
+              [src]="product.imgURL"
+              alt="{{ product.name }}"
+              width="50"
+              class="m-[2px] rounded border-gray-200 border-1 h-10 w-10"
+            />
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+          <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+        </ng-container>
+        <ng-container matColumnDef="minStock">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Min Stock</th>
+          <td mat-cell *matCellDef="let element">{{ element.minStock }}</td>
+        </ng-container>
+        <ng-container matColumnDef="stockQty">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Stock Qty</th>
+          <td mat-cell *matCellDef="let element">{{ element.stockQty }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
+          <td mat-cell *matCellDef="let element">{{ element.category }}</td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+          <td
+            mat-cell
+            *matCellDef="let element"
+            [ngClass]="{
+              'bg-[#d4edda] text-green-600 font-medium px-2 py-1 rounded':
+                element.status === 'Available',
+              'bg-[#f8d7da] text-red-600 font-medium px-2 py-1 rounded':
+                element.status === 'Expired',
+              'bg-[#856404] text-yellow-600 font-medium px-2 py-1 rounded':
+                element.status === 'Low Stock',
+              'bg-[#856404] text-blue-600 font-medium px-2 py-1 rounded':
+                element.status === 'Not Available',
+            }"
+          >
+            {{ element.status }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="sku">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>SKU</th>
+          <td mat-cell *matCellDef="let element">{{ element.sku }}</td>
+        </ng-container>
+        <ng-container matColumnDef="storageLoc">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>
+          <td mat-cell *matCellDef="let element">{{ element.storageLoc }}</td>
+        </ng-container>
+        <ng-container matColumnDef="supplier">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Supplier</th>
+          <td mat-cell *matCellDef="let element">{{ element.supplier }}</td>
+        </ng-container>
+        <ng-container matColumnDef="lastUpd">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Last Updated
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.lastUpd | date : "dd-MM-yyyy" }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <mat-paginator
+        [pageSizeOptions]="[10, 20]"
+        showFirstLastButtons
+      ></mat-paginator>
+    </mat-card-content>
+  </mat-card>
 </div>

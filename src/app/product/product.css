@@ -1,0 +1,57 @@
+.search-container {
+  display: flex;
+  align-items: center;
+  border: 2px solid #ccc;
+  padding: 4px 8px;
+  border-radius: 12px;
+  width: 250px;
+  background-color: white;
+}
+
+.search-container mat-icon {
+  color: #888;
+  margin-right: 6px;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 14px;
+}
+
+.status-badge {
+  border-radius: 30px; 
+  display: flex;
+  text-align: center;
+  padding: 2px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.status-available {
+  background-color: #d4edda; 
+  color: #155724;            
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.status-lowstock {
+  background-color: #fff3cd; 
+  color: #856404;           
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.status-expired {
+  background-color: #f8d7da;
+  color: #721c24;          
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: unset;
+}
+
