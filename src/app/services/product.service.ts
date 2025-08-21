@@ -23,7 +23,7 @@ export interface InventoryItem {
   providedIn: 'root',
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:3000/products';
+  private apiUrl = 'https://inventory-application-api.vercel.app/products';
 
   constructor(private http: HttpClient) {}
 
@@ -36,14 +36,14 @@ export class ProductService {
   }
 
   addProduct(product: any) {
-    return this.http.post<any>('http://localhost:3000/products', product);
+    return this.http.post<any>('https://inventory-application-api.vercel.app/products', product);
   }
   deleteProduct(id: string) {
-    return this.http.delete(`http://localhost:3000/products/${id}`);
+    return this.http.delete(`https://inventory-application-api.vercel.app/products/${id}`);
   }
   updateProduct(product: InventoryItem): Observable<InventoryItem> {
     return this.http.put<InventoryItem>(
-      `http://localhost:3000/products/${product.id}`,
+      `https://inventory-application-api.vercel.app/products/${product.id}`,
       product
     );
   }
