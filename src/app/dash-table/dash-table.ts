@@ -94,16 +94,14 @@ export class DashTable implements AfterViewInit {
 
   openAddProduct() {
     this.addProductClick.emit();
-    console.log('clicked button');
   }
   showModal = false;
-
+  
   OpenPopUp() {
     const dialogRef = this.dialog.open(AddProductDialog, {
       width: '60%',
       height: '700px',
     });
-
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.store.dispatch(loadProducts());

@@ -94,7 +94,6 @@ export class ProductComp implements AfterViewInit {
   
     openAddProduct() {
       this.addProductClick.emit();
-      console.log('clicked button');
     }
     showModal = false;
   
